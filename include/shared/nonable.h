@@ -17,5 +17,5 @@ typedef bool Bool;
         const int size;             \
     } NonableList##t                \
 
-#define Nonable(t) Nonable##t
-#define NonableList(t) NonableList##t
+#define NONABLE(t) Nonable##t
+#define NONABLE_LIST(t) NonableList##t

@@ -23,5 +23,5 @@
 
 // module RAII
 #define MODULE_RAII(n)                      \
-    REF(n) Alloc##n();                      \
+    REF(n) New##n();                        \
     void Free##n();                         \

@@ -20,9 +20,9 @@ MODULE(LandingUsecase,
 
     INIT();
 
-    FN(Nonable(Landing), ReadLanding)(
+    FN(NONABLE(Landing), ReadLanding)(
         SELF(LandingUsecase),
-        Nonable(User) user
+        NONABLE(User) user
     );
 );
 

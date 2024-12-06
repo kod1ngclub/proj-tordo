@@ -30,74 +30,74 @@ MODULE(TaskUsecase,
 
     INIT();
 
-    FN(Optioned(Group, UsecaseError), CreateGroup)(
+    FN(OPTIONED(Group, UsecaseError), CreateGroup)(
         SELF(TaskService),
-        Nonable(User) user,
+        NONABLE(User) user,
 
         GroupName name,
         GroupDescription description
     );
 
-    FN(OptionedList(Group, UsecaseError), ReadGroups)(
+    FN(OPTIONED_LIST(Group, UsecaseError), ReadGroups)(
         SELF(TaskService),
-        Nonable(User) user
+        NONABLE(User) user
     );
 
-    FN(Optioned(Group, UsecaseError), DeprecateGroup)(
+    FN(OPTIONED(Group, UsecaseError), DeprecateGroup)(
         SELF(TaskService),
-        Nonable(User) user,
+        NONABLE(User) user,
 
         GroupUID uid
     );
 
-    FN(Optioned(Item, UsecaseError), CreateItem)(
+    FN(OPTIONED(Item, UsecaseError), CreateItem)(
         SELF(TaskService),
-        Nonable(User) user,
+        NONABLE(User) user,
 
         ItemHead head,
         ItemBody body
     );
 
-    FN(OptionedList(Item, UsecaseError), ReadItemsAtGroup)(
+    FN(OPTIONED_LIST(Item, UsecaseError), ReadItemsAtGroup)(
         SELF(TaskService),
-        Nonable(User) user,
+        NONABLE(User) user,
 
         GroupUID at
     );
 
-    FN(OptionedList(Item, UsecaseError), ReadItemsWithHead)(
+    FN(OPTIONED_LIST(Item, UsecaseError), ReadItemsWithHead)(
         SELF(TaskService),
-        Nonable(User) user,
+        NONABLE(User) user,
 
         ItemHead head
     );
 
-    FN(OptionedList(Item, UsecaseError), ReadItemsWithBody)(
+    FN(OPTIONED_LIST(Item, UsecaseError), ReadItemsWithBody)(
         SELF(TaskService),
-        Nonable(User) user,
+        NONABLE(User) user,
 
         ItemBody body
     );
 
-    FN(Optioned(Item, UsecaseError), DeprecateItem)(
+    FN(OPTIONED(Item, UsecaseError), DeprecateItem)(
         SELF(TaskService),
-        Nonable(User) user,
+        NONABLE(User) user,
 
         ItemUID uid
     );
 
-    FN(Optioned(Item, UsecaseError), ForkItemFrom)(
+    FN(OPTIONED(Item, UsecaseError), ForkItemFrom)(
         SELF(TaskService),
-        Nonable(User) user,
+        NONABLE(User) user,
 
         ItemUID origin,
         ItemHead head,
         ItemBody body
     );
 
-    FN(Optioned(Item, UsecaseError), MoveItemTo)(
+    FN(OPTIONED(Item, UsecaseError), MoveItemTo)(
         SELF(TaskService),
-        Nonable(User) user,
+        NONABLE(User) user,
 
         ItemUID target,
         GroupUID to

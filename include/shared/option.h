@@ -16,6 +16,6 @@
         e err;                          \
     } e##Optioned                       \
 
-#define Optioned(t, e) e##Optioned##t
-#define OptionedList(t, e) e##OptionedList##t
-#define OptionedVoid(e) e##Optioned
+#define OPTIONED(t, e) e##Optioned##t
+#define OPTIONED_LIST(t, e) e##OptionedList##t
+#define OPTIONED_VOID(e) e##Optioned
