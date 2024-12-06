@@ -1,15 +1,29 @@
 #pragma once
 
 #include "../entity/landing.h"
+#include "../entity/user.h"
 
-#include "shared/protocol.h"
-#include "shared/option.h"
-#include "shared/nonable.h"
+#include "../service/conf.h"
+#include "../service/user.h"
+#include "../service/landing.h"
 
-PROTOCOL(LandingUsecase,
+#include "../shared/module.h"
+#include "../shared/nonable.h"
+
+MACRO_NONABLE(Landing);
+MACRO_NONABLE(User);
+
+MODULE(LandingUsecase,
+    DEP(LandingService, landing);
+    DEP(UserService, user);
+    DEP(ConfService, conf);
+
     INIT();
 
-    FN(Landing, ReadLanding)(
-        // ...
+    FN(Nonable(Landing), ReadLanding)(
+        SELF(LandingUsecase),
+        Nonable(User) user
     );
 );
+
+MODULE_RAII(LandingUsecase);

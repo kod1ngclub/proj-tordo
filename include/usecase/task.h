@@ -4,57 +4,104 @@
 #include "../entity/user.h"
 #include "../entity/item.h"
 
-#include "shared/protocol.h"
-#include "shared/option.h"
-#include "shared/nonable.h"
+#include "../service/task.h"
+#include "../service/item.h"
+#include "../service/conf.h"
+#include "../service/user.h"
 
-GENERIC_USECASE_OPTIONED(Group);
-GENERIC_USECASE_OPTIONED_LIST(Group);
-GENERIC_USECASE_OPTIONED(Item);
-GENERIC_USECASE_OPTIONED_LIST(Item);
+#include "shared/error.h"
 
-GENERIC_NONABLE(User);
+#include "../shared/module.h"
+#include "../shared/option.h"
+#include "../shared/nonable.h"
 
-PROTOCOL(TaskUsecase,
+MACRO_OPTIONED(Group, UsecaseError);
+MACRO_OPTIONED_LIST(Group, UsecaseError);
+MACRO_OPTIONED(Item, UsecaseError);
+MACRO_OPTIONED_LIST(Item, UsecaseError);
+
+MACRO_NONABLE(User);
+
+MODULE(TaskUsecase,
+    DEP(TaskService, task);
+    DEP(ItemService, item);
+    DEP(UserService, user);
+    DEP(ConfService, conf);
+
     INIT();
 
-    FN(OPTIONED(Group), CreateGroup)(
-        // ...
+    FN(Optioned(Group, UsecaseError), CreateGroup)(
+        SELF(TaskService),
+        Nonable(User) user,
+
+        GroupName name,
+        GroupDescription description
     );
 
-    FN(OPTIONED_LIST(Group), ReadGroups)(
-        // ...
+    FN(OptionedList(Group, UsecaseError), ReadGroups)(
+        SELF(TaskService),
+        Nonable(User) user
     );
 
-    FN(OPTIONED(Group), DeprecateGroup)(
-        // ...
+    FN(Optioned(Group, UsecaseError), DeprecateGroup)(
+        SELF(TaskService),
+        Nonable(User) user,
+
+        GroupUID uid
     );
 
-    FN(OPTIONED(Item), CreateItem)(
-        // ...
+    FN(Optioned(Item, UsecaseError), CreateItem)(
+        SELF(TaskService),
+        Nonable(User) user,
+
+        ItemHead head,
+        ItemBody body
     );
 
-    FN(OPTIONED_LIST(Item), ReadItemsAtGroup)(
-        // ...
+    FN(OptionedList(Item, UsecaseError), ReadItemsAtGroup)(
+        SELF(TaskService),
+        Nonable(User) user,
+
+        GroupUID at
     );
 
-    FN(OPTIONED_LIST(Item), ReadItemsWithHead)(
-        // ...
+    FN(OptionedList(Item, UsecaseError), ReadItemsWithHead)(
+        SELF(TaskService),
+        Nonable(User) user,
+
+        ItemHead head
     );
 
-    FN(OPTIONED_LIST(Item), ReadItemsWithBody)(
-        // ...
+    FN(OptionedList(Item, UsecaseError), ReadItemsWithBody)(
+        SELF(TaskService),
+        Nonable(User) user,
+
+        ItemBody body
     );
 
-    FN(OPTIONED(Item), DeprecateItem)(
-        // ...
+    FN(Optioned(Item, UsecaseError), DeprecateItem)(
+        SELF(TaskService),
+        Nonable(User) user,
+
+        ItemUID uid
     );
 
-    FN(OPTIONED(Item), ForkItemFrom)(
-        // ...
+    FN(Optioned(Item, UsecaseError), ForkItemFrom)(
+        SELF(TaskService),
+        Nonable(User) user,
+
+        ItemUID origin,
+        ItemHead head,
+        ItemBody body
     );
 
-    FN(OPTIONED(Item), MoveItemTo)(
-        // ...
+    FN(Optioned(Item, UsecaseError), MoveItemTo)(
+        SELF(TaskService),
+        Nonable(User) user,
+
+        ItemUID target,
+        GroupUID to
     );
 );
+
+MODULE_RAII(TaskUsecase);
